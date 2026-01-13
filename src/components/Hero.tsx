@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onTryTool: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onTryTool }) => {
   return (
     <section style={{
       minHeight: '100vh',
@@ -11,9 +15,9 @@ const Hero: React.FC = () => {
       background: 'radial-gradient(circle at 50% 50%, rgba(20, 20, 40, 0.4) 0%, transparent 70%)'
     }}>
       <div className="container">
-        <h1 className="gradient-text glow-effect" style={{ 
-          fontSize: '5rem', 
-          fontWeight: 800, 
+        <h1 className="gradient-text glow-effect" style={{
+          fontSize: '5rem',
+          fontWeight: 800,
           marginBottom: '1rem',
           letterSpacing: '-2px'
         }}>
@@ -40,8 +44,9 @@ const Hero: React.FC = () => {
             boxShadow: '0 0 20px var(--accent-glow)',
             transition: 'var(--transition)'
           }}
-          onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-          onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            onClick={onTryTool}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
             Get Started
           </button>
@@ -56,14 +61,14 @@ const Hero: React.FC = () => {
             backdropFilter: 'blur(10px)',
             transition: 'var(--transition)'
           }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
-            e.currentTarget.style.transform = 'translateY(-2px)';
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.2)';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
           >
             Documentation
           </button>
