@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Hero from './components/Hero';
 import Features from './components/Features';
-import ToolInterface from './components/ToolInterface';
+import Layout from './components/ide/Layout';
 import './index.css';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
           </footer>
         </>
       ) : (
-        <ToolInterface onBack={() => setShowTool(false)} />
+        <Layout onBack={() => setShowTool(false)} />
       )}
     </div>
   );

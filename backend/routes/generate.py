@@ -1,13 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 import asyncio
-import sys
-import os
-
-# Get the backend directory path
-backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if backend_dir not in sys.path:
-    sys.path.insert(0, backend_dir)
+import traceback
 
 from agents.planner_agent import run_planner_agent
 from agents.copywriter_agent import run_copywriter_agent
@@ -33,6 +27,8 @@ async def generate_website(request: GenerateRequest):
     Main endpoint - Runs all 3 agents in parallel and merges results.
     """
     try:
+        print(f"Received generation request for prompt: {request.prompt}")
+        
         # Run all 3 agents simultaneously
         plan_task = run_planner_agent(request.prompt)
         copy_task = run_copywriter_agent(request.prompt)
@@ -49,6 +45,8 @@ async def generate_website(request: GenerateRequest):
         return GenerateResponse(**merged)
         
     except Exception as e:
+        traceback.print_exc()
+        print(f"Error details: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Generation failed: {str(e)}")
 
 @router.get("/health")
