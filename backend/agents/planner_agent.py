@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from openrouter_client import call_openrouter
 
-MODEL = "tngtech/deepseek-r1t2-chimera:free"
+MODEL = "meta-llama/llama-3-8b-instruct:free"
 
 SYSTEM_PROMPT = """You are an expert UX architect and website planner.
 Your role is to analyze user requirements and create a detailed plan for a React + TypeScript website.

@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from openrouter_client import call_openrouter
 
-MODEL = "qwen/qwen3-coder:free"
+MODEL = "meta-llama/llama-3-8b-instruct:free"
 
 SYSTEM_PROMPT = """You are an expert React + TypeScript developer.
 Your role is to generate clean, production-ready React components.

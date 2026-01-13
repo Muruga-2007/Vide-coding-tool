@@ -8,6 +8,7 @@ from agents.copywriter_agent import run_copywriter_agent
 from agents.code_agent import run_code_agent
 from aggregator import merge_agent_outputs
 
+from openrouter_client import OpenRouterAPIError
 router = APIRouter()
 
 class GenerateRequest(BaseModel):
@@ -44,6 +45,10 @@ async def generate_website(request: GenerateRequest):
         
         return GenerateResponse(**merged)
         
+    except OpenRouterAPIError as e:
+        traceback.print_exc()
+        print(f"OpenRouter API error: {e.detail}")
+        raise HTTPException(status_code=e.status_code, detail=f"OpenRouter error: {e.detail}")
     except Exception as e:
         traceback.print_exc()
         print(f"Error details: {str(e)}")

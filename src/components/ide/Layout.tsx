@@ -44,16 +44,16 @@ const Layout: React.FC<LayoutProps> = ({ onBack }) => {
             display: 'flex',
             height: '100vh',
             width: '100vw',
-            backgroundColor: '#1e1e1e',
+            backgroundColor: '#181818', // Main dark background
             color: '#ccccc7',
             overflow: 'hidden',
-            fontFamily: 'Consolas, "Courier New", monospace'
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
         }}>
             {/* Left Sidebar (Activity Bar + Explorer) */}
             <Sidebar activeFile={activeFile} onFileSelect={setActiveFile} onBack={onBack} />
 
             {/* Main Content Area */}
-            <div style={{ display: 'flex', flexDirection: 'column', flex: 1, borderLeft: '1px solid #2b2b2b' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
 
                 {/* Editor & Preview */}
                 <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
@@ -66,7 +66,7 @@ const Layout: React.FC<LayoutProps> = ({ onBack }) => {
                 </div>
 
                 {/* Bottom Panel: Terminal */}
-                <div style={{ height: '200px', borderTop: '1px solid #2b2b2b' }}>
+                <div style={{ height: '220px', borderTop: '1px solid #2b2b2b' }}>
                     <Terminal result={result} loading={loading} error={error} />
                 </div>
             </div>

@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from openrouter_client import call_openrouter
 
-MODEL = "google/gemma-3n-e2b-it:free"
+MODEL = "meta-llama/llama-3-8b-instruct:free"
 
 SYSTEM_PROMPT = """You are an expert copywriter and marketing specialist.
 Your role is to create compelling, conversion-focused copy for websites.

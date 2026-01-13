@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Sparkles } from 'lucide-react';
+import { Send, Sparkles, Plus, MoreHorizontal, Globe, Image, Mic, AtSign } from 'lucide-react';
 
 interface ChatPanelProps {
     onGenerate: (prompt: string) => void;
@@ -23,61 +23,76 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ onGenerate, loading, error }) => 
         setInput('');
     };
 
-    // Auto-scroll to bottom of chat could go here
-
     // Add agent response when loading starts/stops (simulated)
     useEffect(() => {
         if (loading) {
             setHistory(prev => [...prev, { role: 'agent', text: 'Working on it...' }]);
-        } else if (history.length > 0 && history[history.length - 1].text === 'Working on it...') {
-            // Replace "Working on it" or append done? 
-            // For now we just leave it, maybe update it.
         }
     }, [loading]);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: '#252526' }}>
-            <div style={{ height: '40px', padding: '10px', borderBottom: '1px solid #3c3c3c', fontSize: '0.9rem', fontWeight: 'bold' }}>
-                AI ASSISTANT
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: '#181818' }}>
+            {/* Header matches 'New Chat' style */}
+            <div style={{
+                height: '45px',
+                padding: '0 1rem',
+                borderBottom: '1px solid #2b2b2b',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                fontSize: '0.85rem',
+                fontWeight: 500,
+                color: '#cccccc'
+            }}>
+                <span>New Chat</span>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <Plus size={16} color="#cccccc" style={{ cursor: 'pointer' }} />
+                    <MoreHorizontal size={16} color="#cccccc" style={{ cursor: 'pointer' }} />
+                </div>
             </div>
 
             {/* Chat History */}
-            <div style={{ flex: 1, padding: '1rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ flex: 1, padding: '1rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {history.length === 0 && (
-                    <div style={{ color: '#858585', textAlign: 'center', marginTop: '2rem', fontSize: '0.9rem' }}>
-                        <Sparkles size={48} style={{ marginBottom: '1rem', opacity: 0.5 }} />
-                        <p>Ask me to build a website.<br />Example: "Landing page for a coffee shop"</p>
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#858585', opacity: 0.7 }}>
+                        <div style={{ fontSize: '2rem', fontWeight: 300, marginBottom: '1rem', color: '#4d4d4d' }}>Vibe Coder</div>
+                        <p style={{ fontSize: '0.9rem' }}>Generate. Refine. Deploy.</p>
                     </div>
                 )}
 
                 {history.map((msg, i) => (
                     <div key={i} style={{
                         alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                        backgroundColor: msg.role === 'user' ? '#0e639c' : '#3c3c3c',
-                        padding: '8px 12px',
+                        backgroundColor: msg.role === 'user' ? '#2b2b2b' : 'transparent',
+                        padding: msg.role === 'user' ? '8px 12px' : '0',
                         borderRadius: '6px',
-                        maxWidth: '85%',
+                        maxWidth: '90%',
                         fontSize: '0.9rem',
-                        lineHeight: '1.4'
+                        lineHeight: '1.5',
+                        color: '#cccccc'
                     }}>
+                        {msg.role === 'agent' && <div style={{ fontSize: '0.8rem', color: '#858585', marginBottom: '4px' }}>AI Agent</div>}
                         {msg.text}
                     </div>
                 ))}
 
                 {error && (
-                    <div style={{ color: '#f48771', padding: '0.5rem', fontSize: '0.9rem' }}>
+                    <div style={{ color: '#f48771', padding: '0.5rem', fontSize: '0.9rem', background: 'rgba(255,0,0,0.1)', borderRadius: '4px' }}>
                         Error: {error}
                     </div>
                 )}
             </div>
 
-            {/* Input Area */}
-            <div style={{ padding: '1rem', borderTop: '1px solid #3c3c3c' }}>
+            {/* Input Area matches reference */}
+            <div style={{ padding: '1rem' }}>
                 <div style={{
+                    backgroundColor: '#2b2b2b',
+                    borderRadius: '8px',
+                    border: '1px solid #3c3c3c',
+                    padding: '8px',
                     display: 'flex',
-                    backgroundColor: '#3c3c3c',
-                    borderRadius: '4px',
-                    border: '1px solid #007acc'
+                    flexDirection: 'column',
+                    gap: '8px'
                 }}>
                     <textarea
                         value={input}
@@ -88,33 +103,64 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ onGenerate, loading, error }) => 
                                 handleSubmit();
                             }
                         }}
-                        placeholder="Describe your website..."
+                        placeholder="Plan, @ for context, / for commands"
                         style={{
-                            flex: 1,
                             backgroundColor: 'transparent',
-                            color: '#fff',
+                            color: '#e0e0e0',
                             border: 'none',
-                            padding: '10px',
                             outline: 'none',
                             resize: 'none',
                             fontFamily: 'inherit',
-                            minHeight: '40px'
+                            fontSize: '0.9rem',
+                            minHeight: '60px',
+                            width: '100%'
                         }}
                     />
-                    <button
-                        onClick={handleSubmit}
-                        disabled={loading}
-                        style={{
-                            background: 'transparent',
-                            border: 'none',
-                            color: '#fff',
-                            padding: '0 10px',
-                            cursor: 'pointer',
-                            opacity: loading ? 0.5 : 1
-                        }}
-                    >
-                        <Send size={18} />
-                    </button>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                            <div style={{
+                                display: 'flex', alignItems: 'center', gap: '4px',
+                                background: '#3c3c3c', borderRadius: '4px', padding: '2px 6px', fontSize: '0.75rem', color: '#ccc',
+                                border: '1px solid #4d4d4d'
+                            }}>
+                                <Sparkles size={12} /> Agent
+                            </div>
+                            <div style={{
+                                display: 'flex', alignItems: 'center', gap: '4px',
+                                background: 'transparent', borderRadius: '4px', padding: '2px 6px', fontSize: '0.75rem', color: '#858585',
+                                border: '1px solid transparent' // Placeholder for structure
+                            }}>
+                                Auto
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                            <AtSign size={14} color="#858585" style={{ cursor: 'pointer' }} />
+                            <Globe size={14} color="#858585" style={{ cursor: 'pointer' }} />
+                            <Image size={14} color="#858585" style={{ cursor: 'pointer' }} />
+                            <Mic size={14} color="#858585" style={{ cursor: 'pointer' }} />
+
+                            <button
+                                onClick={handleSubmit}
+                                disabled={loading}
+                                style={{
+                                    background: loading ? '#333' : '#4d4d4d',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    color: 'white',
+                                    padding: '4px 8px',
+                                    cursor: 'pointer',
+                                    marginLeft: '4px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Send size={14} />
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

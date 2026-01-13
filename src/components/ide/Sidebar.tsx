@@ -9,11 +9,11 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ activeFile, onFileSelect, onBack }) => {
     return (
-        <div style={{ display: 'flex', height: '100%' }}>
+        <div style={{ display: 'flex', height: '100%', backgroundColor: '#181818' }}>
             {/* Activity Bar */}
             <div style={{
-                width: '50px',
-                backgroundColor: '#333333',
+                width: '48px',
+                backgroundColor: '#181818',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -22,8 +22,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeFile, onFileSelect, onBack }) =
                 justifyContent: 'space-between'
             }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
-                    <Files size={24} color={activeFile ? '#fff' : '#858585'} />
-                    <Search size={24} color="#858585" />
+                    <div style={{ borderLeft: '2px solid #fff', paddingLeft: '12px', marginLeft: '-14px' }}>
+                        <Files size={24} color="#fff" />
+                    </div>
+                    <Search size={24} color="#858585" style={{ opacity: 0.8 }} />
                 </div>
 
                 <div style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center' }}>
@@ -39,22 +41,54 @@ const Sidebar: React.FC<SidebarProps> = ({ activeFile, onFileSelect, onBack }) =
             </div>
 
             {/* Explorer Panel */}
-            <div style={{ width: '250px', backgroundColor: '#252526', padding: '0.5rem' }}>
-                <div style={{ fontSize: '0.8rem', fontWeight: 'bold', padding: '0.5rem', color: '#bbbbbb' }}>EXPLORER</div>
+            <div style={{ width: '250px', backgroundColor: '#181818', padding: '0' }}>
+                <div style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 500,
+                    padding: '0.8rem 1rem',
+                    color: '#bbb',
+                    letterSpacing: '0.5px'
+                }}>
+                    EXPLORER
+                </div>
 
-                <div style={{ marginTop: '0.5rem' }}>
-                    <div style={{ padding: '0.25rem 0.5rem', fontWeight: 'bold', fontSize: '0.8rem', color: '#cccccc' }}>
-                        V PROJECT REPO
+                <div style={{ marginTop: '0' }}>
+                    {/* Project Folder Header */}
+                    <div style={{
+                        padding: '4px 0.5rem',
+                        fontWeight: 'bold',
+                        fontSize: '0.8rem',
+                        color: '#fff',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        cursor: 'pointer'
+                    }}>
+                        <span style={{ fontSize: '0.7rem' }}>▼</span> VIBE-PROJECT
                     </div>
-                    {/* Mock File Tree */}
-                    <div style={{ marginLeft: '1rem', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                        {['App.tsx', 'index.css', 'components/Hero.tsx', 'components/Features.tsx', 'utils/api.ts'].map(file => (
+
+                    {/* File Tree */}
+                    <div style={{ marginLeft: '0px', display: 'flex', flexDirection: 'column' }}>
+                        {['src', 'src/components', 'src/utils'].map(folder => (
+                            <div key={folder} style={{
+                                padding: '3px 0.5rem 3px 1.5rem',
+                                fontSize: '0.9rem',
+                                color: '#aaa',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '6px'
+                            }}>
+                                <span style={{ fontSize: '0.7rem' }}>▶</span> {folder.split('/').pop()}
+                            </div>
+                        ))}
+
+                        {['App.tsx', 'main.tsx', 'index.css', 'vite.config.ts'].map(file => (
                             <div
                                 key={file}
                                 onClick={() => onFileSelect(file)}
                                 style={{
                                     cursor: 'pointer',
-                                    padding: '3px 5px',
+                                    padding: '4px 0.5rem 4px 2rem',
                                     fontSize: '0.9rem',
                                     color: activeFile === file ? '#fff' : '#969696',
                                     backgroundColor: activeFile === file ? '#37373d' : 'transparent',
@@ -63,11 +97,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeFile, onFileSelect, onBack }) =
                                     gap: '6px'
                                 }}
                             >
-                                <span style={{ color: file.endsWith('tsx') ? '#4d9bb0' : '#dcb67d' }}>
-                                    {/* Icon placeholder */}
-                                    {file.endsWith('tsx') ? '⚛️' : '#'}
+                                <span style={{ color: file.endsWith('tsx') ? '#4d9bb0' : file.endsWith('ts') ? '#3178c6' : '#dcb67d' }}>
+                                    {file.endsWith('css') ? '#' : '<>'}
                                 </span>
-                                {file.split('/').pop()}
+                                {file}
                             </div>
                         ))}
                     </div>
