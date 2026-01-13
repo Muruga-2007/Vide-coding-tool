@@ -4,8 +4,10 @@ import asyncio
 import sys
 import os
 
-# Add parent directory to path for imports
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+# Get the backend directory path
+backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
 
 from agents.planner_agent import run_planner_agent
 from agents.copywriter_agent import run_copywriter_agent
