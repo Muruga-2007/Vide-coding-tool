@@ -1,19 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional, Dict
-from app.ai_engine.llm_manager import LLMManager
-from app.ai_engine.prompt_builder import PromptBuilder
-from app.repo.context_builder import ContextBuilder
-from app.ai_engine.embeddings import EmbeddingManager
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from typing import List, Optional, Dict
 from app.core.config import settings
+from app.services import llm_manager, prompt_builder, context_builder
 
 router = APIRouter()
-
-# Initialize Singletons (TODO: Use Dep Injection)
-llm_manager = LLMManager()
-prompt_builder = PromptBuilder()
-embedding_manager = EmbeddingManager()
-context_builder = ContextBuilder(embedding_manager)
 
 class ChatRequest(BaseModel):
     message: str

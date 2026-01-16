@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
+from typing import List, Optional
 from app.repo.scanner import RepoScanner
-# Re-using the same embedding manager instance for simplicity in this MVP
-from app.api.chat import embedding_manager 
+from app.services import embedding_manager 
 from loguru import logger
 import os
 from pathlib import Path
