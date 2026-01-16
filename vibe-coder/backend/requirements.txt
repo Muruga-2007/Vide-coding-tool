@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+pydantic
+python-multipart
+websockets
+watchdog
+gitpython
+langchain
+langchain-community
+openai
+sentence-transformers
+faiss-cpu
+sqlalchemy
+aiosqlite
+python-dotenv
+loguru
+pathspec

@@ -1,0 +1,28 @@
+# Vibe Coder Implementation Task List
+
+- [x] Project Initialization
+  - [x] Create directory structure
+  - [x] Setup backend environment (Python, FastAPI)
+  - [x] Setup frontend environment (Vite, React, TS, TailwindCSS)
+- [/] Backend Core Features
+  - [x] Repo Scanner (indexing, extension filtering, ignoring patterns)
+  - [x] AI Engine (LLM Manager, Prompt Builder)
+  - [x] Context Builder (Token-aware chunking, dependency detection)
+  - [x] Terminal Executor & Parser
+  - [x] Error & Bug Management (Persistent reports in `/ai-reports/`)
+- [x] Frontend Core Features
+  - [x] Design System (TailwindCSS + Shadcn/UI)
+  - [x] Monaco Editor integration
+  - [x] Chat Component with AI interaction
+  - [x] File Explorer
+  - [x] Terminal Interface
+- [x] Integration & Workflow
+  - [x] API Gateway & WebSocket setup
+  - [x] Diff Manager (Previewing and applying changes)
+  - [x] Secure File Writing & Git Snapshots
+- [ ] Infrastructure
+  - [ ] Docker & Docker Compose setup
+  - [ ] LLM Container (Local LLM support)
+- [ ] Verification & Testing
+  - [ ] End-to-end workflow validation
+  - [ ] Security audit (path traversal, sandbox)
